@@ -89,7 +89,7 @@ void game::update()
 	count++;
 
 	// Hero hight and width
-	destR.h = 30;
+	destR.h = 3;
 	destR.w = 3;
 	destR.x = 10;
 
