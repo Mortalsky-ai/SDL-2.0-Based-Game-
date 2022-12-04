@@ -1,18 +1,23 @@
-#include "SDL.h"
+#include "Game.h"
 
-int main(int argc, char* argv[])
+game *Game = nullptr;
+
+int main(int argc, char * argv[])
 {
-	SDL_Init(SDL_INIT_EVERYTHING);
-	SDL_Window* window = SDL_CreateWindow("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 400, SDL_WINDOW_SHOWN);
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
-	
-	SDL_SetRenderDrawColor(renderer, 120, 120, 120, 255);
+	Game = new game();
 
-	SDL_RenderClear(renderer);
+	Game->init("Star", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
 
-	SDL_RenderPresent(renderer);
+	while (Game->running())
+	{
+		Game->handleEvents();
+		Game->update();
+		Game->render();
+	}
 
-	SDL_Delay(3000);
+	Game->clean();
+
+
 
 	return 0;
 }
