@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "texture.h"
 
 // Texture Variable
 SDL_Texture* heroTex;
@@ -47,6 +48,9 @@ void game::init(const char *title, int xpos, int ypos, int width, int hight, boo
 		// boolen for check start
 		isRunning = true;
 
+		heroTex = texture::LoadTexture("assets/Hero.png", renderer);
+
+		/*
 		SDL_Surface* tmpSurface = IMG_Load("assets/Hero.png");
 		if (tmpSurface)
 		{
@@ -59,7 +63,8 @@ void game::init(const char *title, int xpos, int ypos, int width, int hight, boo
 
 		}
 		
-		SDL_FreeSurface(tmpSurface);
+		SDL_FreeSurface(tmpSurface); 
+		*/ 
 	}
 	else
 	{
