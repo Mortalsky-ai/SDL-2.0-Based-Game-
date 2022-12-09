@@ -1,11 +1,9 @@
 #include "Game.h"
 #include "texture.h"
+#include "GameObject.h"
 
-// Texture Variable
-SDL_Texture* heroTex;
+GameObject* hero;
 
-// TexVariable Parameters
-SDL_Rect srcR, destR;
 
 // Constructor
 game::game()
@@ -48,23 +46,9 @@ void game::init(const char *title, int xpos, int ypos, int width, int hight, boo
 		// boolen for check start
 		isRunning = true;
 
-		heroTex = texture::LoadTexture("assets/Hero.png", renderer);
-
-		/*
-		SDL_Surface* tmpSurface = IMG_Load("assets/Hero.png");
-		if (tmpSurface)
-		{
-			heroTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-			std::cout << "HERO IS HERE!" << std::endl;
-		}
-		else
-		{
-			std::cout << "HERO IS SLEEPING!" << std::endl;
-
-		}
+		hero = new GameObject("assets/Hero.png", renderer, 0, 0);
 		
-		SDL_FreeSurface(tmpSurface); 
-		*/ 
+		
 	}
 	else
 	{
@@ -91,21 +75,14 @@ void game::handleEvents()
 // Updating every change
 void game::update()
 {
-	count++;
-
-	// Hero hight and width
-	destR.h = 3;
-	destR.w = 3;
-	destR.x = 10;
-
-	std::cout << count << std::endl;
+	hero->Update();
 }
 
 // Passing updates to renderer
 void game::render()
 {
 	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, heroTex, NULL, NULL);
+	hero->Render();
 	SDL_RenderPresent(renderer);
 }
 
